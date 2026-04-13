@@ -384,6 +384,9 @@ export class Clip extends Namespace<
   /**
    * Remove notes by given note ids.
    * Available since Live 11.0.
+   * 
+   * Resolves when Live has applied the deletion. The Live API does not return data (e.g. no count of removed notes).
+   * Note ids should come from `getNotesExtended`; the LOM expects existing note ids.
    */
   removeNotesById(ids: number[]) {
     return this.sendCommand("remove_notes_by_id", [ids]);
