@@ -3,6 +3,7 @@ import { Namespace } from "./index.js";
 import { Color } from "../util/color.js";
 import { DeviceParameter } from "./device-parameter.js";
 import {
+  NewNoteSpec,
   Note,
   NoteExtended,
   noteToTuple,
@@ -312,6 +313,14 @@ export class Clip extends Namespace<
    */
   applyNoteModifications(notes: NoteExtended[]) {
     return this.sendCommand("apply_note_modifications", { notes });
+  }
+
+  /**
+   * Appends notes to the clip. Returns each new note's `note_id` in input order.
+   * MIDI clips only. Available since Live 11.0.
+   */
+  addNewNotes(notes: NewNoteSpec[]): Promise<number[]> {
+    return this.sendCommand("add_new_notes", { notes });
   }
 
   /**
