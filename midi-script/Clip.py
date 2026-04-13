@@ -28,7 +28,7 @@ class Clip(Interface):
         return ns.get_notes(from_time, from_pitch, time_span, pitch_span)
 
     def get_notes_extended(self, ns, from_time=0, from_pitch=0, time_span=99999999999999, pitch_span=128):
-        midi_note_vector = ns.get_notes_extended(from_pitch, pitch_span, from_time, time_span)
+        midi_note_vector = ns.get_notes_extended(from_pitch, pitch_span, float(from_time), float(time_span))
         return [
             {
                 "duration": note.duration,
