@@ -1,6 +1,8 @@
 from __future__ import absolute_import
 from .Interface import Interface
 
+import Live
+
 
 class Clip(Interface):
     @staticmethod
@@ -71,6 +73,22 @@ class Clip(Interface):
 
     def set_notes(self, ns, notes):
         return ns.set_notes(tuple(notes))
+
+    def add_new_notes(self, ns, notes):
+        specs = []
+        for note in notes:
+            kwargs = {
+                "pitch": note["pitch"],
+                "start_time": note["start_time"],
+                "duration": note["duration"],
+                "velocity": note.get("velocity", 100),
+                "mute": note.get("mute", False),
+            }
+            for key in ("probability", "velocity_deviation", "release_velocity"):
+                if note.get(key) is not None:
+                    kwargs[key] = note[key]
+            specs.append(Live.Clip.MidiNoteSpecification(**kwargs))
+        return list(ns.add_new_notes(tuple(specs)))
 
     def replace_selected_notes(self, ns, notes):
         return ns.replace_selected_notes(tuple(notes))
