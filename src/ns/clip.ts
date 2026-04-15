@@ -3,6 +3,7 @@ import { Namespace } from "./index.js";
 import { Color } from "../util/color.js";
 import { DeviceParameter } from "./device-parameter.js";
 import {
+  NewNoteSpec,
   Note,
   NoteExtended,
   noteToTuple,
@@ -315,6 +316,14 @@ export class Clip extends Namespace<
   }
 
   /**
+   * Appends notes to the clip. Returns each new note's `note_id` in input order.
+   * MIDI clips only. Available since Live 11.0.
+   */
+  addNewNotes(notes: NewNoteSpec[]): Promise<number[]> {
+    return this.sendCommand("add_new_notes", { notes });
+  }
+
+  /**
    * Jump forward or backward by the specified relative amount in beats.
    * Will do nothing if the clip is not playing.
    */
@@ -375,6 +384,9 @@ export class Clip extends Namespace<
   /**
    * Remove notes by given note ids.
    * Available since Live 11.0.
+   * 
+   * Resolves when Live has applied the deletion. The Live API does not return data (e.g. no count of removed notes).
+   * Note ids should come from `getNotesExtended`; the LOM expects existing note ids.
    */
   removeNotesById(ids: number[]) {
     return this.sendCommand("remove_notes_by_id", [ids]);

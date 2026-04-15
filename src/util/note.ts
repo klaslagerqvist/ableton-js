@@ -26,6 +26,18 @@ export interface NoteExtended {
   velocity_deviation: number;
 }
 
+/** Arguments for `Clip.addNewNotes` / Live `add_new_notes` (Live 11+). */
+export interface NewNoteSpec {
+  pitch: number;
+  start_time: number;
+  duration: number;
+  velocity?: number;
+  mute?: boolean;
+  probability?: number;
+  velocity_deviation?: number;
+  release_velocity?: number;
+}
+
 export const tupleToNote = (tuple: NoteTuple): Note => ({
   pitch: tuple[0],
   time: tuple[1],
