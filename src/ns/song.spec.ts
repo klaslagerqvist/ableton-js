@@ -48,6 +48,7 @@ const gettableProps: (keyof GettableProperties)[] = [
   "signature_denominator",
   "signature_numerator",
   "song_length",
+  "start_time",
   "swing_amount",
   "tempo",
   "tempo_follower_enabled",

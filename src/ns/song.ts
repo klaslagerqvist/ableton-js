@@ -49,6 +49,7 @@ export interface GettableProperties {
   signature_denominator: number;
   signature_numerator: number;
   song_length: number;
+  start_time: number;
   swing_amount: number;
   tempo: number;
   tempo_follower_enabled: boolean;
@@ -145,6 +146,7 @@ export interface ObservableProperties {
   signature_denominator: number;
   signature_numerator: number;
   song_length: number;
+  start_time: number;
   swing_amount: number;
   tempo: number;
   tempo_follower_enabled: boolean;
